@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://dozer.sourceforge.net
+http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+ <mapping>
+  <class-a>org.argonot.authenticator.business.entity.User</class-a>
+  <class-b>org.argonot.authenticator.manager.vo.UserVO</class-b>
+ </mapping>
+ 
+ <mapping>
+  <class-a>org.argonot.authenticator.business.entity.Authorization</class-a>
+  <class-b>org.argonot.authenticator.manager.vo.AuthorizationVO</class-b>
+ </mapping>
+</mappings>

@@ -6,6 +6,7 @@
 <html>
 <head>
 	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 	<title>Admin :: Applications</title>
 </head>

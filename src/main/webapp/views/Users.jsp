@@ -6,7 +6,10 @@
 <html>
 <head>
 	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/confirm-bootstrap.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/authenticator-manager.js"/>"></script>
 	<title>Admin :: Utilisateurs</title>
 </head>
 <body>

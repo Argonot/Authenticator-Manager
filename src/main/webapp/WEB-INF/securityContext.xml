@@ -7,11 +7,9 @@
 
 	<!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/resources*" access="permitAll" />
-		<intercept-url pattern="/authenticator*" access="permitAll" />
-		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
-		<form-login  authentication-failure-url="/403" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		<form-login  authentication-failure-url="/errors/403" />
 	</http>
 	
 	<authentication-manager>

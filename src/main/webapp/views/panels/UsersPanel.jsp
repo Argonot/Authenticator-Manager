@@ -30,14 +30,24 @@
 					</c:choose>
 				</td>
 				<td>
-					<a class="btn btn-primary" href="#" role="button">Modifier</a>
-					<a class="btn btn-success" href="#" role="button">Débloquer</a>
-					<a class="btn btn-danger" href="#" role="button">Supprimer</a>
+					<a class="btn btn-default" href="<c:url value="/admin/users/${user.id}/update"/>" role="button">Modifier</a>
+					<a class="btn btn-success" href="<c:url value="/admin/users/${user.id}/unlock"/>" role="button">Débloquer</a>
+					<a class="btn btn-danger" href="<c:url value="/admin/users/${user.id}/delete"/>" role="button">Supprimer</a>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 </div>
 <div id="users-action-bar" class="text-right">
-	<a class="btn btn-primary" href="#" role="button">Ajouter</a>
+	<a class="btn btn-primary" href="<c:url value="/admin/users/create"/>" role="button">Nouveau</a>
+</div>
+
+<div id="confirm" class="modal hide fade">
+  <div class="modal-body">
+    Are you sure?
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>
+    <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+  </div>
 </div>

@@ -17,13 +17,13 @@
 				<td>${ auth.app.name }</td>
 				<td>${ auth.role.name }</td>
 				<td>
-					<a class="btn btn-primary" href="#" role="button">Modifier</a>
-					<a class="btn btn-danger" href="#" role="button">Supprimer</a>
+					<a class="btn btn-default" href="<c:url value="/admin/authorizations/${auth.id}/update"/>" role="button">Modifier</a>
+					<a class="btn btn-danger" href="<c:url value="/admin/authorizations/${auth.id}/delete"/>" role="button">Supprimer</a>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 </div>
 <div id="authorizations-action-bar" class="text-right">
-	<a class="btn btn-primary" href="#" role="button">Ajouter</a>
+	<a class="btn btn-primary" href="/admin/authorizations/create" role="button">Ajouter</a>
 </div>
