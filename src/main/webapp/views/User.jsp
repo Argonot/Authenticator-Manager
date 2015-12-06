@@ -64,7 +64,7 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="password">Password</label>
-			    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password" value="${user.password}"/>
+			    <form:input type="password" class="form-control" id="password" placeholder="Password" path="password"/>
 			    <form:errors path="password" cssClass="alert alert-danger"/>
 			  </div>
 			  <a class="btn btn-default" href="<c:url value="/admin/users"/>" role="button">Retour</a>

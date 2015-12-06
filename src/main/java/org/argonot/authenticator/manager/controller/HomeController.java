@@ -22,7 +22,12 @@ public class HomeController {
     /**
      * Forbidden page
      */
-    private static final String FORBIDDEN_PAGE = "403";
+    private static final String FORBIDDEN_PAGE = "errors/403";
+
+    /**
+     * Security error page
+     */
+    private static final String SECURITY_ERROR_PAGE = "errors/hdiv";
 
     /**
      * Route to the home page which is the API documentation
@@ -37,9 +42,20 @@ public class HomeController {
      * Route to the home page which is the API documentation
      * @return Index.jsp
      */
-    @RequestMapping(value = "403", method = RequestMethod.POST)
+    @RequestMapping(value = "security/403", method = RequestMethod.GET)
     public ModelAndView forbidden() {
         return new ModelAndView(FORBIDDEN_PAGE);
+    }
+
+    /**
+     * Route to the security errors
+     * 
+     * @param redirectAttributes
+     * @return
+     */
+    @RequestMapping(value = "security/error", method = RequestMethod.GET)
+    public ModelAndView securityError() {
+        return new ModelAndView(SECURITY_ERROR_PAGE);
     }
 
 }

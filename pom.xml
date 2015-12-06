@@ -175,23 +175,6 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.framework.version}</version>
 		</dependency>
-		<!-- Spring Security -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>${spring.security.version}</version>
-		</dependency>
-
 		<!-- DOZER -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
@@ -231,6 +214,32 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.2.Final</version>
+		</dependency>
+		<!-- SECURITY -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hdiv</groupId>
+			<artifactId>hdiv-config</artifactId>
+			<version>2.1.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hdiv</groupId>
+			<artifactId>hdiv-spring-mvc</artifactId>
+			<version>2.1.12</version>
 		</dependency>
 		<!-- PROJECT DEPENDENCIES -->
 		<dependency>

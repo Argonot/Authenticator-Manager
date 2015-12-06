@@ -38,8 +38,6 @@ public class UserVO {
     /**
      * User password provided
      */
-    @NotNull
-    @NotEmpty
     private String password;
 
     public String getName() {
