@@ -25,5 +25,5 @@
 	</table>
 </div>
 <div id="authorizations-action-bar" class="text-right">
-	<a class="btn btn-primary" href="/admin/authorizations/create" role="button">Ajouter</a>
+	<a class="btn btn-primary" href="<c:url value="/admin/authorizations/create"/>" role="button">Ajouter</a>
 </div>

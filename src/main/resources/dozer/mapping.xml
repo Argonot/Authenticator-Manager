@@ -12,4 +12,14 @@ http://dozer.sourceforge.net/schema/beanmapping.xsd">
   <class-a>org.argonot.authenticator.business.entity.Authorization</class-a>
   <class-b>org.argonot.authenticator.manager.vo.AuthorizationVO</class-b>
  </mapping>
+ 
+ <mapping>
+  <class-a>org.argonot.authenticator.business.entity.Application</class-a>
+  <class-b>org.argonot.authenticator.manager.vo.ApplicationVO</class-b>
+ </mapping>
+ 
+ <mapping>
+  <class-a>org.argonot.authenticator.business.entity.Role</class-a>
+  <class-b>org.argonot.authenticator.manager.vo.RoleVO</class-b>
+ </mapping>
 </mappings>

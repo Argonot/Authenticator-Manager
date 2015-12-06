@@ -13,13 +13,13 @@
 				<td>${ app.id }</td>
 				<td>${ app.name }</td>
 				<td>
-					<a class="btn btn-primary" href="#" role="button">Modifier</a>
-					<a class="btn btn-danger" href="#" role="button">Supprimer</a>
+					<a class="btn btn-default" href="<c:url value="/admin/applications/${app.id}/update"/>" role="button">Modifier</a>
+					<a class="btn btn-danger" href="<c:url value="/admin/applications/${app.id}/delete"/>" role="button">Supprimer</a>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 </div>
 <div id="applications-action-bar" class="text-right">
-	<a class="btn btn-primary" href="#" role="button">Ajouter</a>
+	<a class="btn btn-primary" href="<c:url value="/admin/applications/create"/>" role="button">Ajouter</a>
 </div>

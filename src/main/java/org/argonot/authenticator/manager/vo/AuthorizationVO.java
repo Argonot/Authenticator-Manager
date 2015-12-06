@@ -24,7 +24,7 @@ public class AuthorizationVO {
      * Provided application authorized for user
      */
     @NotNull
-    private Application application;
+    private Application app;
 
     /**
      * Provided role authorized for user on application
@@ -40,12 +40,12 @@ public class AuthorizationVO {
         this.user = user;
     }
 
-    public Application getApplication() {
-        return application;
+    public Application getApp() {
+        return app;
     }
 
-    public void setApplication(Application application) {
-        this.application = application;
+    public void setApp(Application app) {
+        this.app = app;
     }
 
     public Role getRole() {

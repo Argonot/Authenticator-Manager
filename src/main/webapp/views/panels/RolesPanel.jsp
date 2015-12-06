@@ -13,13 +13,13 @@
 				<td>${ role.id }</td>
 				<td>${ role.name }</td>
 				<td>
-					<a class="btn btn-primary" href="#" role="button">Modifier</a>
-					<a class="btn btn-danger" href="#" role="button">Supprimer</a>
+					<a class="btn btn-primary" href="<c:url value="/admin/roles/${role.id}/update"/>" role="button">Modifier</a>
+					<a class="btn btn-danger" href="<c:url value="/admin/roles/${role.id}/delete"/>" role="button">Supprimer</a>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 </div>
 <div id="roles-action-bar" class="text-right">
-	<a class="btn btn-primary" href="#" role="button">Ajouter</a>
+	<a class="btn btn-primary" href="<c:url value="/admin/roles/create"/>" role="button">Ajouter</a>
 </div>

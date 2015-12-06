@@ -51,29 +51,54 @@
 			    <label for="user">User</label>
 			    <form:select class="form-control" id="user" path="user.id" value="${authorization.user.id}">
 					<c:forEach items="${users}" var="user">
-						<form:option value="${user.id}">${user.email}</form:option>
+						<c:choose>
+	                        <c:when test="${ user.id == authorization.user.id }">
+	                           <c:set var="selected" scope="request" value="selected"/>
+	                        </c:when>
+	                        <c:otherwise>
+	                           <c:set var="selected" scope="request" value=""/>
+	                        </c:otherwise>
+                       </c:choose>
+						<form:option value="${user.id}" selected="${ selected }">${user.email}</form:option>
 					</c:forEach>
 				</form:select>
 			    <form:errors path="user.id" cssClass="alert alert-danger"/>
 			  </div>
 			  <div class="form-group">
 			    <label for="application">Application</label>
-			    <form:select class="form-control" id="application" path="application.id" value="${authorization.app.id}">
+			    <form:select class="form-control" id="application" path="app.id" value="${authorization.app.id}">
 					<c:forEach items="${applications}" var="app">
-						<form:option value="${app.id}">${app.name}</form:option>
+						<c:choose>
+	                        <c:when test="${ app.id == authorization.app.id }">
+	                           <c:set var="selected" scope="request" value="selected"/>
+	                        </c:when>
+	                        <c:otherwise>
+	                           <c:set var="selected" scope="request" value=""/>
+	                        </c:otherwise>
+                       </c:choose>
+						<form:option value="${app.id}" selected="${ selected }">${app.name}</form:option>
 					</c:forEach>
 				</form:select>
-			    <form:errors path="application.id" cssClass="alert alert-danger"/>
+			    <form:errors path="app.id" cssClass="alert alert-danger"/>
 			  </div>
 			  <div class="form-group">
 			    <label for="role">Role</label>
 			    <form:select class="form-control" id="role" path="role.id" value="${authorization.role.id}">
 			    	<c:forEach items="${roles}" var="role">
-						<form:option value="${role.id}">${role.name}</form:option>
+			    	<c:choose>
+	                        <c:when test="${ role.id == authorization.role.id }">
+	                           <c:set var="selected" scope="request" value="selected"/>
+	                        </c:when>
+	                        <c:otherwise>
+	                           <c:set var="selected" scope="request" value=""/>
+	                        </c:otherwise>
+                       </c:choose>
+						<form:option value="${role.id}" selected="${ selected }">${role.name}</form:option>
 					</c:forEach>
 			    </form:select>
 			    <form:errors path="role.id" cssClass="alert alert-danger"/>
 			  </div>
+			  <a class="btn btn-default" href="<c:url value="/admin/"/>" role="button">Retour</a>
 			  <button type="submit" class="btn btn-primary">
 			  	<c:choose>
 					<c:when test="${ action == 'update' }">

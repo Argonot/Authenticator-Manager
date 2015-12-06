@@ -3,7 +3,10 @@ package org.argonot.authenticator.manager.controller;
 import javax.validation.Valid;
 
 import org.argonot.authenticator.business.entity.Authorization;
+import org.argonot.authenticator.business.service.ApplicationService;
 import org.argonot.authenticator.business.service.AuthorizationService;
+import org.argonot.authenticator.business.service.RoleService;
+import org.argonot.authenticator.business.service.UserService;
 import org.argonot.authenticator.manager.vo.AuthorizationVO;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,15 @@ public class AdminAuthorizationController {
     private AuthorizationService authorizationService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private ApplicationService applicationService;
+
+    @Autowired
     private Mapper mapper;
 
     /**
@@ -44,6 +56,9 @@ public class AdminAuthorizationController {
         ModelAndView page = new ModelAndView("Authorization");
         page.addObject("authorizationVO", new AuthorizationVO());
         page.addObject("authorization", authorizationService.find(idAuth));
+        page.addObject("users", userService.listUsers());
+        page.addObject("applications", applicationService.listApplications());
+        page.addObject("roles", roleService.listRoles());
         page.addObject("action", "update");
         return page;
     }
@@ -64,7 +79,7 @@ public class AdminAuthorizationController {
             page.addObject("authorization",
                     authorizationService.update(mapper.map(authorizationVO, Authorization.class), idAuth));
             page.addObject("authorizations", authorizationService.listAuthorizations());
-            page.setViewName("Authorizations");
+            page.setViewName("Admin");
         }
         return page;
     }
@@ -78,6 +93,9 @@ public class AdminAuthorizationController {
     public ModelAndView authorization() {
         ModelAndView page = new ModelAndView("Authorization");
         page.addObject("authorizationVO", new AuthorizationVO());
+        page.addObject("users", userService.listUsers());
+        page.addObject("applications", applicationService.listApplications());
+        page.addObject("roles", roleService.listRoles());
         return page;
     }
 
@@ -87,14 +105,13 @@ public class AdminAuthorizationController {
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView userCreate(@ModelAttribute("authorizationVO") @Valid AuthorizationVO authorizationVO,
+    public ModelAndView authorisationCreate(@ModelAttribute("authorizationVO") @Valid AuthorizationVO authorizationVO,
             BindingResult bindingResult) {
         ModelAndView page = new ModelAndView("Authorization");
         if (!bindingResult.hasErrors()) {
-            page.addObject("authorization",
-                    authorizationService.create(mapper.map(authorizationVO, Authorization.class)));
+            authorizationService.create(mapper.map(authorizationVO, Authorization.class));
             page.addObject("authorizations", authorizationService.listAuthorizations());
-            page.setViewName("Authorization");
+            page.setViewName("Admin");
         }
         return page;
     }
@@ -107,8 +124,8 @@ public class AdminAuthorizationController {
      * @return
      */
     @RequestMapping(value = "/{idAuth}/delete", method = RequestMethod.GET)
-    public ModelAndView deleteAuthorization(@PathVariable long idAuth) {
-        ModelAndView page = new ModelAndView("Authorizations");
+    public ModelAndView authorisationDelete(@PathVariable long idAuth) {
+        ModelAndView page = new ModelAndView("Admin");
         authorizationService.removeAuthorization(idAuth);
         page.addObject("authorizations", authorizationService.listAuthorizations());
         return page;

@@ -37,7 +37,7 @@ public class AdminUserController {
      * 
      * @return
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView users() {
         ModelAndView page = new ModelAndView("Users");
         page.addObject("users", userService.listUsers());
@@ -100,7 +100,7 @@ public class AdminUserController {
     public ModelAndView userCreate(@ModelAttribute("userVO") @Valid UserVO userVO, BindingResult bindingResult) {
         ModelAndView page = new ModelAndView("User");
         if (!bindingResult.hasErrors()) {
-            page.addObject("user", userService.create(mapper.map(userVO, User.class)));
+            userService.create(mapper.map(userVO, User.class));
             page.addObject("users", userService.listUsers());
             page.setViewName("Users");
         }
