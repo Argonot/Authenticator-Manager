@@ -29,6 +29,24 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/authorizations")
 public class AdminAuthorizationController {
 
+    private static final String AUTHORIZATION_LIST_PAGE_HTTP_ATTR = "Admin";
+
+    private static final String AUTHORIZATION_LIST_HTTP_ATTR = "authorizations";
+
+    private static final String UPDATE_OR_CREATE_ACTION_HTTP_ATTR = "action";
+
+    private static final String ROLE_LIST_HTTP_ATTR = "roles";
+
+    private static final String APPLICATION_LIST_HTTP_ATTR = "applications";
+
+    private static final String USER_LIST_HTTP_ATTR = "users";
+
+    private static final String AUTHORIZATION_HTTP_ATTR = "authorization";
+
+    private static final String AUTHORIZATION_PROVIDED_HTTP_ATTR = "authorizationVO";
+
+    private static final String AUTHORIZATION_PAGE_HTTP_ATTR = "Authorization";
+
     @Autowired
     private AuthorizationService authorizationService;
 
@@ -53,13 +71,13 @@ public class AdminAuthorizationController {
      */
     @RequestMapping(value = "/{idAuth}/update", method = RequestMethod.GET)
     public ModelAndView authorization(@PathVariable long idAuth) {
-        ModelAndView page = new ModelAndView("Authorization");
-        page.addObject("authorizationVO", new AuthorizationVO());
-        page.addObject("authorization", authorizationService.find(idAuth));
-        page.addObject("users", userService.listUsers());
-        page.addObject("applications", applicationService.listApplications());
-        page.addObject("roles", roleService.listRoles());
-        page.addObject("action", "update");
+        ModelAndView page = new ModelAndView(AUTHORIZATION_PAGE_HTTP_ATTR);
+        page.addObject(AUTHORIZATION_PROVIDED_HTTP_ATTR, new AuthorizationVO());
+        page.addObject(AUTHORIZATION_HTTP_ATTR, authorizationService.find(idAuth));
+        page.addObject(USER_LIST_HTTP_ATTR, userService.listUsers());
+        page.addObject(APPLICATION_LIST_HTTP_ATTR, applicationService.listApplications());
+        page.addObject(ROLE_LIST_HTTP_ATTR, roleService.listRoles());
+        page.addObject(UPDATE_OR_CREATE_ACTION_HTTP_ATTR, "update");
         return page;
     }
 
@@ -72,14 +90,14 @@ public class AdminAuthorizationController {
      */
     @RequestMapping(value = "/{idAuth}/update", method = RequestMethod.POST)
     public ModelAndView authorizationUpdate(@PathVariable long idAuth,
-            @ModelAttribute("authorizationVO") @Valid AuthorizationVO authorizationVO,
+            @ModelAttribute(AUTHORIZATION_PROVIDED_HTTP_ATTR) @Valid AuthorizationVO authorizationVO,
             BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("Authorization");
+        ModelAndView page = new ModelAndView(AUTHORIZATION_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
-            page.addObject("authorization",
+            page.addObject(AUTHORIZATION_HTTP_ATTR,
                     authorizationService.update(mapper.map(authorizationVO, Authorization.class), idAuth));
-            page.addObject("authorizations", authorizationService.listAuthorizations());
-            page.setViewName("Admin");
+            page.addObject(AUTHORIZATION_LIST_HTTP_ATTR, authorizationService.listAuthorizations());
+            page.setViewName(AUTHORIZATION_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -91,11 +109,11 @@ public class AdminAuthorizationController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView authorization() {
-        ModelAndView page = new ModelAndView("Authorization");
-        page.addObject("authorizationVO", new AuthorizationVO());
-        page.addObject("users", userService.listUsers());
-        page.addObject("applications", applicationService.listApplications());
-        page.addObject("roles", roleService.listRoles());
+        ModelAndView page = new ModelAndView(AUTHORIZATION_PAGE_HTTP_ATTR);
+        page.addObject(AUTHORIZATION_PROVIDED_HTTP_ATTR, new AuthorizationVO());
+        page.addObject(USER_LIST_HTTP_ATTR, userService.listUsers());
+        page.addObject(APPLICATION_LIST_HTTP_ATTR, applicationService.listApplications());
+        page.addObject(ROLE_LIST_HTTP_ATTR, roleService.listRoles());
         return page;
     }
 
@@ -105,13 +123,13 @@ public class AdminAuthorizationController {
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView authorisationCreate(@ModelAttribute("authorizationVO") @Valid AuthorizationVO authorizationVO,
+    public ModelAndView authorisationCreate(@ModelAttribute(AUTHORIZATION_PROVIDED_HTTP_ATTR) @Valid AuthorizationVO authorizationVO,
             BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("Authorization");
+        ModelAndView page = new ModelAndView(AUTHORIZATION_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
             authorizationService.create(mapper.map(authorizationVO, Authorization.class));
-            page.addObject("authorizations", authorizationService.listAuthorizations());
-            page.setViewName("Admin");
+            page.addObject(AUTHORIZATION_LIST_HTTP_ATTR, authorizationService.listAuthorizations());
+            page.setViewName(AUTHORIZATION_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -125,9 +143,9 @@ public class AdminAuthorizationController {
      */
     @RequestMapping(value = "/{idAuth}/delete", method = RequestMethod.GET)
     public ModelAndView authorisationDelete(@PathVariable long idAuth) {
-        ModelAndView page = new ModelAndView("Admin");
+        ModelAndView page = new ModelAndView(AUTHORIZATION_LIST_PAGE_HTTP_ATTR);
         authorizationService.removeAuthorization(idAuth);
-        page.addObject("authorizations", authorizationService.listAuthorizations());
+        page.addObject(AUTHORIZATION_LIST_HTTP_ATTR, authorizationService.listAuthorizations());
         return page;
     }
 

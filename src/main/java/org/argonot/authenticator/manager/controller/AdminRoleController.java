@@ -26,6 +26,18 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/roles")
 public class AdminRoleController {
 
+    private static final String UPDATE_OR_CREATE_ACTION_HTTP_ATTR = "action";
+
+    private static final String ROLE_HTTP_ATTR = "role";
+
+    private static final String ROLE_PROVIDED_HTTP_ATTR = "roleVO";
+
+    private static final String ROLE_PAGE_HTTP_ATTR = "Role";
+
+    private static final String ROLE_LIST_HTTP_ATTR = "roles";
+
+    private static final String ROLE_LIST_PAGE_HTTP_ATTR = "Roles";
+
     @Autowired
     private RoleService roleService;
 
@@ -39,8 +51,8 @@ public class AdminRoleController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView roles() {
-        ModelAndView page = new ModelAndView("Roles");
-        page.addObject("roles", roleService.listRoles());
+        ModelAndView page = new ModelAndView(ROLE_LIST_PAGE_HTTP_ATTR);
+        page.addObject(ROLE_LIST_HTTP_ATTR, roleService.listRoles());
         return page;
     }
 
@@ -53,10 +65,10 @@ public class AdminRoleController {
      */
     @RequestMapping(value = "/{ruid}/update", method = RequestMethod.GET)
     public ModelAndView role(@PathVariable String ruid) {
-        ModelAndView page = new ModelAndView("Role");
-        page.addObject("roleVO", new RoleVO());
-        page.addObject("role", roleService.find(ruid));
-        page.addObject("action", "update");
+        ModelAndView page = new ModelAndView(ROLE_PAGE_HTTP_ATTR);
+        page.addObject(ROLE_PROVIDED_HTTP_ATTR, new RoleVO());
+        page.addObject(ROLE_HTTP_ATTR, roleService.find(ruid));
+        page.addObject(UPDATE_OR_CREATE_ACTION_HTTP_ATTR, "update");
         return page;
     }
 
@@ -68,13 +80,13 @@ public class AdminRoleController {
      * @return
      */
     @RequestMapping(value = "/{ruid}/update", method = RequestMethod.POST)
-    public ModelAndView roleUpdate(@ModelAttribute("roleVO") @Valid RoleVO roleVO,
+    public ModelAndView roleUpdate(@ModelAttribute(ROLE_PROVIDED_HTTP_ATTR) @Valid RoleVO roleVO,
             BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("Role");
+        ModelAndView page = new ModelAndView(ROLE_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
-            page.addObject("role", roleService.update(mapper.map(roleVO, Role.class)));
-            page.addObject("roles", roleService.listRoles());
-            page.setViewName("Roles");
+            page.addObject(ROLE_HTTP_ATTR, roleService.update(mapper.map(roleVO, Role.class)));
+            page.addObject(ROLE_LIST_HTTP_ATTR, roleService.listRoles());
+            page.setViewName(ROLE_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -86,8 +98,8 @@ public class AdminRoleController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView role() {
-        ModelAndView page = new ModelAndView("Role");
-        page.addObject("roleVO", new RoleVO());
+        ModelAndView page = new ModelAndView(ROLE_PAGE_HTTP_ATTR);
+        page.addObject(ROLE_PROVIDED_HTTP_ATTR, new RoleVO());
         return page;
     }
 
@@ -97,13 +109,13 @@ public class AdminRoleController {
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView roleCreate(@ModelAttribute("roleVO") @Valid RoleVO roleVO,
+    public ModelAndView roleCreate(@ModelAttribute(ROLE_PROVIDED_HTTP_ATTR) @Valid RoleVO roleVO,
             BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("Role");
+        ModelAndView page = new ModelAndView(ROLE_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
             roleService.create(mapper.map(roleVO, Role.class));
-            page.addObject("roles", roleService.listRoles());
-            page.setViewName("Roles");
+            page.addObject(ROLE_LIST_HTTP_ATTR, roleService.listRoles());
+            page.setViewName(ROLE_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -117,9 +129,9 @@ public class AdminRoleController {
      */
     @RequestMapping(value = "/{ruid}/delete", method = RequestMethod.GET)
     public ModelAndView roleDelete(@PathVariable String ruid) {
-        ModelAndView page = new ModelAndView("Roles");
+        ModelAndView page = new ModelAndView(ROLE_LIST_PAGE_HTTP_ATTR);
         roleService.removeRole(ruid);
-        page.addObject("roles", roleService.listRoles());
+        page.addObject(ROLE_LIST_HTTP_ATTR, roleService.listRoles());
         return page;
     }
 

@@ -26,6 +26,18 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/users")
 public class AdminUserController {
 
+    private static final String UPDATE_OR_CREATE_ACTION_HTTP_ATTR = "action";
+
+    private static final String USER_HTTP_ATTR = "user";
+
+    private static final String PROVIDED_USER_HTTP_ATTR = "userVO";
+
+    private static final String USER_PAGE_HTTP_ATTR = "User";
+
+    private static final String USER_LIST_HTTP_ATTR = "users";
+
+    private static final String USER_LIST_PAGE_HTTP_ATTR = "Users";
+
     @Autowired
     private UserService userService;
 
@@ -39,8 +51,8 @@ public class AdminUserController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView users() {
-        ModelAndView page = new ModelAndView("Users");
-        page.addObject("users", userService.listUsers());
+        ModelAndView page = new ModelAndView(USER_LIST_PAGE_HTTP_ATTR);
+        page.addObject(USER_LIST_HTTP_ATTR, userService.listUsers());
         return page;
     }
 
@@ -53,10 +65,10 @@ public class AdminUserController {
      */
     @RequestMapping(value = "/{idUser}/update", method = RequestMethod.GET)
     public ModelAndView user(@PathVariable long idUser) {
-        ModelAndView page = new ModelAndView("User");
-        page.addObject("userVO", new UserVO());
-        page.addObject("user", userService.find(idUser));
-        page.addObject("action", "update");
+        ModelAndView page = new ModelAndView(USER_PAGE_HTTP_ATTR);
+        page.addObject(PROVIDED_USER_HTTP_ATTR, new UserVO());
+        page.addObject(USER_HTTP_ATTR, userService.find(idUser));
+        page.addObject(UPDATE_OR_CREATE_ACTION_HTTP_ATTR, "update");
         return page;
     }
 
@@ -68,13 +80,13 @@ public class AdminUserController {
      * @return
      */
     @RequestMapping(value = "/{idUser}/update", method = RequestMethod.POST)
-    public ModelAndView userUpdate(@PathVariable long idUser, @ModelAttribute("userVO") @Valid UserVO userVO,
+    public ModelAndView userUpdate(@PathVariable long idUser, @ModelAttribute(PROVIDED_USER_HTTP_ATTR) @Valid UserVO userVO,
             BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("User");
+        ModelAndView page = new ModelAndView(USER_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
-            page.addObject("user", userService.update(mapper.map(userVO, User.class), idUser));
-            page.addObject("users", userService.listUsers());
-            page.setViewName("Users");
+            page.addObject(USER_HTTP_ATTR, userService.update(mapper.map(userVO, User.class), idUser));
+            page.addObject(USER_LIST_HTTP_ATTR, userService.listUsers());
+            page.setViewName(USER_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -86,8 +98,8 @@ public class AdminUserController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView user() {
-        ModelAndView page = new ModelAndView("User");
-        page.addObject("userVO", new UserVO());
+        ModelAndView page = new ModelAndView(USER_PAGE_HTTP_ATTR);
+        page.addObject(PROVIDED_USER_HTTP_ATTR, new UserVO());
         return page;
     }
 
@@ -97,12 +109,12 @@ public class AdminUserController {
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView userCreate(@ModelAttribute("userVO") @Valid UserVO userVO, BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("User");
+    public ModelAndView userCreate(@ModelAttribute(PROVIDED_USER_HTTP_ATTR) @Valid UserVO userVO, BindingResult bindingResult) {
+        ModelAndView page = new ModelAndView(USER_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
             userService.create(mapper.map(userVO, User.class));
-            page.addObject("users", userService.listUsers());
-            page.setViewName("Users");
+            page.addObject(USER_LIST_HTTP_ATTR, userService.listUsers());
+            page.setViewName(USER_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -116,9 +128,9 @@ public class AdminUserController {
      */
     @RequestMapping(value = "/{idUser}/unlock", method = RequestMethod.GET)
     public ModelAndView unlockUser(@PathVariable long idUser) {
-        ModelAndView page = new ModelAndView("Users");
+        ModelAndView page = new ModelAndView(USER_LIST_PAGE_HTTP_ATTR);
         userService.unlockUser(idUser);
-        page.addObject("users", userService.listUsers());
+        page.addObject(USER_LIST_HTTP_ATTR, userService.listUsers());
         return page;
     }
 
@@ -131,9 +143,9 @@ public class AdminUserController {
      */
     @RequestMapping(value = "/{idUser}/delete", method = RequestMethod.GET)
     public ModelAndView deleteUser(@PathVariable long idUser) {
-        ModelAndView page = new ModelAndView("Users");
+        ModelAndView page = new ModelAndView(USER_LIST_PAGE_HTTP_ATTR);
         userService.removeUser(idUser);
-        page.addObject("users", userService.listUsers());
+        page.addObject(USER_LIST_HTTP_ATTR, userService.listUsers());
         return page;
     }
 }

@@ -13,12 +13,14 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class ApplicationVO {
 
+    private static final int AUID_SIZE = 3;
+
     /**
      * AUID : Application Unique ID
      */
     @NotNull
     @NotEmpty
-    @Length(min = 3, max = 3)
+    @Length(min = AUID_SIZE, max = AUID_SIZE)
     private String id;
 
     /**

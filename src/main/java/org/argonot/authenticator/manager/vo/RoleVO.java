@@ -13,12 +13,14 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class RoleVO {
 
+    private static final int RUID_SIZE = 3;
+
     /**
      * RUID : Role Unique ID
      */
     @NotNull
     @NotEmpty
-    @Length(min = 3, max = 3)
+    @Length(min = RUID_SIZE, max = RUID_SIZE)
     private String id;
 
     /**

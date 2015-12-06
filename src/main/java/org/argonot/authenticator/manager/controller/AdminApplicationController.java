@@ -26,6 +26,18 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/applications")
 public class AdminApplicationController {
 
+    private static final String APPLICATION_HTTP_ATTR = "application";
+
+    private static final String PROVIDED_APPLICATION_HTTP_ATTR = "applicationVO";
+
+    private static final String UPDATE_OR_CREATE_ACTION_HTTP_ATTR = "action";
+
+    private static final String APPLICATION_PAGE_HTTP_ATTR = "Application";
+
+    private static final String APPLICATION_LIST_HTTP_ATTR = "applications";
+
+    private static final String APPLICATION_LIST_PAGE_HTTP_ATTR = "Applications";
+
     @Autowired
     private ApplicationService applicationService;
 
@@ -39,8 +51,8 @@ public class AdminApplicationController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView applications() {
-        ModelAndView page = new ModelAndView("Applications");
-        page.addObject("applications", applicationService.listApplications());
+        ModelAndView page = new ModelAndView(APPLICATION_LIST_PAGE_HTTP_ATTR);
+        page.addObject(APPLICATION_LIST_HTTP_ATTR, applicationService.listApplications());
         return page;
     }
 
@@ -53,10 +65,10 @@ public class AdminApplicationController {
      */
     @RequestMapping(value = "/{auid}/update", method = RequestMethod.GET)
     public ModelAndView application(@PathVariable String auid) {
-        ModelAndView page = new ModelAndView("Application");
-        page.addObject("applicationVO", new ApplicationVO());
-        page.addObject("application", applicationService.find(auid));
-        page.addObject("action", "update");
+        ModelAndView page = new ModelAndView(APPLICATION_PAGE_HTTP_ATTR);
+        page.addObject(PROVIDED_APPLICATION_HTTP_ATTR, new ApplicationVO());
+        page.addObject(APPLICATION_HTTP_ATTR, applicationService.find(auid));
+        page.addObject(UPDATE_OR_CREATE_ACTION_HTTP_ATTR, "update");
         return page;
     }
 
@@ -68,13 +80,13 @@ public class AdminApplicationController {
      * @return
      */
     @RequestMapping(value = "/{auid}/update", method = RequestMethod.POST)
-    public ModelAndView authorizationUpdate(@ModelAttribute("applicationVO") @Valid ApplicationVO applicationVO,
+    public ModelAndView authorizationUpdate(@ModelAttribute(PROVIDED_APPLICATION_HTTP_ATTR) @Valid ApplicationVO applicationVO,
             BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("Application");
+        ModelAndView page = new ModelAndView(APPLICATION_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
-            page.addObject("application", applicationService.update(mapper.map(applicationVO, Application.class)));
-            page.addObject("applications", applicationService.listApplications());
-            page.setViewName("Applications");
+            page.addObject(APPLICATION_HTTP_ATTR, applicationService.update(mapper.map(applicationVO, Application.class)));
+            page.addObject(APPLICATION_LIST_HTTP_ATTR, applicationService.listApplications());
+            page.setViewName(APPLICATION_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -86,8 +98,8 @@ public class AdminApplicationController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView application() {
-        ModelAndView page = new ModelAndView("Application");
-        page.addObject("applicationVO", new ApplicationVO());
+        ModelAndView page = new ModelAndView(APPLICATION_PAGE_HTTP_ATTR);
+        page.addObject(PROVIDED_APPLICATION_HTTP_ATTR, new ApplicationVO());
         return page;
     }
 
@@ -97,13 +109,13 @@ public class AdminApplicationController {
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ModelAndView applicationCreate(@ModelAttribute("applicationVO") @Valid ApplicationVO applicationVO,
+    public ModelAndView applicationCreate(@ModelAttribute(PROVIDED_APPLICATION_HTTP_ATTR) @Valid ApplicationVO applicationVO,
             BindingResult bindingResult) {
-        ModelAndView page = new ModelAndView("Application");
+        ModelAndView page = new ModelAndView(APPLICATION_PAGE_HTTP_ATTR);
         if (!bindingResult.hasErrors()) {
             applicationService.create(mapper.map(applicationVO, Application.class));
-            page.addObject("applications", applicationService.listApplications());
-            page.setViewName("Applications");
+            page.addObject(APPLICATION_LIST_HTTP_ATTR, applicationService.listApplications());
+            page.setViewName(APPLICATION_LIST_PAGE_HTTP_ATTR);
         }
         return page;
     }
@@ -117,9 +129,9 @@ public class AdminApplicationController {
      */
     @RequestMapping(value = "/{auid}/delete", method = RequestMethod.GET)
     public ModelAndView applicationDelete(@PathVariable String auid) {
-        ModelAndView page = new ModelAndView("Applications");
+        ModelAndView page = new ModelAndView(APPLICATION_LIST_PAGE_HTTP_ATTR);
         applicationService.removeApplication(auid);
-        page.addObject("applications", applicationService.listApplications());
+        page.addObject(APPLICATION_LIST_HTTP_ATTR, applicationService.listApplications());
         return page;
     }
 }
