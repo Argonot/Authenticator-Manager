@@ -39,15 +39,5 @@
 	</table>
 </div>
 <div id="users-action-bar" class="text-right">
-	<a class="btn btn-primary" href="<c:url value="/admin/users/create"/>" role="button">Nouveau</a>
-</div>
-
-<div id="confirm" class="modal hide fade">
-  <div class="modal-body">
-    Are you sure?
-  </div>
-  <div class="modal-footer">
-    <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>
-    <button type="button" data-dismiss="modal" class="btn">Cancel</button>
-  </div>
+	<a class="btn btn-primary" href="<c:url value="/admin/users/create"/>" role="button">Ajouter</a>
 </div>

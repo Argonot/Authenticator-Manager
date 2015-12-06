@@ -13,7 +13,7 @@
 				<td>${ role.id }</td>
 				<td>${ role.name }</td>
 				<td>
-					<a class="btn btn-primary" href="<c:url value="/admin/roles/${role.id}/update"/>" role="button">Modifier</a>
+					<a class="btn btn-default" href="<c:url value="/admin/roles/${role.id}/update"/>" role="button">Modifier</a>
 					<a class="btn btn-danger" href="<c:url value="/admin/roles/${role.id}/delete"/>" role="button">Supprimer</a>
 				</td>
 			</tr>
