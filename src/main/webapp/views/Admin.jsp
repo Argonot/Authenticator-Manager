@@ -14,15 +14,15 @@
 </head>
 <body>
 	<div id="admin-header" class="row">
-		<div id="admin-header-left-side" class="col-md-3"></div>
-		<div id="admin-header-container" class="col-md-6">
+		<div id="admin-header-left-side" class="col-md-2"></div>
+		<div id="admin-header-container" class="col-md-8">
 			<jsp:include page="includes/Header.jsp" />
 		</div>
-		<div id="admin-header-right-side" class="col-md-3"></div>
+		<div id="admin-header-right-side" class="col-md-2"></div>
 	</div>
 	<div id="admin-menu" class="row">
-		<div id="admin-menu-left-side" class="col-md-3"></div>
-		<div id="admin-menu-container" class="col-md-6">
+		<div id="admin-menu-left-side" class="col-md-2"></div>
+		<div id="admin-menu-container" class="col-md-8">
 			<ul id="menu-admin" class="nav nav-tabs">
 				<li role="presentation" class="active"><a href="<c:url value="/admin"/>">Autorisations</a></li>
 				<li role="presentation"><a href="<c:url value="/admin/applications"/>">Applications</a></li>
@@ -31,14 +31,14 @@
 				<li role="presentation"><a href="<c:url value="/admin/logout"/>">Déconnexion</a></li>
 			</ul>
 		</div>
-		<div id="admin-menu-right-side" class="col-md-3"></div>
+		<div id="admin-menu-right-side" class="col-md-2"></div>
 	</div>
 	<div id="admin-page" class="row">
-		<div id="admin-page-left-side" class="col-md-3"></div>
-		<div id="admin-page-container" class="col-md-6">
+		<div id="admin-page-left-side" class="col-md-2"></div>
+		<div id="admin-page-container" class="col-md-8">
 			<jsp:include page="panels/AuthorizationsPanel.jsp" />
 		</div>
-		<div id="admin-page-right-side" class="col-md-3"></div>
+		<div id="admin-page-right-side" class="col-md-2"></div>
 	</div>
 </body>
 </html>
