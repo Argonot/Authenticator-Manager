@@ -5,6 +5,7 @@
 	<table id="users-table" class="table table-hover">
 		<tr>
 			<th>#</th>
+			<th>Avatar</th>
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>Email</th>
@@ -15,6 +16,7 @@
 		<c:forEach items="${users}" var="user">
 			<tr id="user_${ user.id }">
 				<td>${ user.id }</td>
+				<td><img src="${ user.avatar }" width="50" height="50"/></td>
 				<td>${ user.name }</td>
 				<td>${ user.surname }</td>
 				<td>${ user.email }</td>

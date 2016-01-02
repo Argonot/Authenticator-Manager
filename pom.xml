@@ -24,7 +24,6 @@
 		<jackson.mapper.version>1.9.13</jackson.mapper.version>
 		<json.documentation.version>1.1.16</json.documentation.version>
 		<dozer.version>5.3.1</dozer.version>
-		<jacoco.version>0.7.4.201502262128</jacoco.version>
 		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
 		<argonot.commons.version>0.0.1-SNAPSHOT</argonot.commons.version>
 		<argonot.business.version>0.0.1-SNAPSHOT</argonot.business.version>
@@ -49,38 +48,17 @@
 	</scm>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven.compiler.plugin.version}</version>
-					<configuration>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.jacoco</groupId>
-					<artifactId>jacoco-maven-plugin</artifactId>
-					<version>${jacoco.version}</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>prepare-agent</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>report</id>
-							<phase>prepare-package</phase>
-							<goals>
-								<goal>report</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 	<dependencies>
 		<!-- SPRING DATA -->
